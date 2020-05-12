@@ -22,7 +22,9 @@ const EventSchema = new Schema({
     type: String
   },
   event_mode: {
-    type: String
+    type: String,
+    default: 'public',
+    enum: ['public', 'private']
   },
   list_of_organizers: [{
     type: mongoose.Schema.Types.ObjectId,
