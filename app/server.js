@@ -60,6 +60,13 @@ class Server {
    */
   routes () {
     new routes.User(this.app, this.connect)
+    new routes.Event(this.app, this.connect)
+    new routes.Group(this.app, this.connect)
+    new routes.DiscutionThread(this.app, this.connect)
+    new routes.PhotoBook(this.app, this.connect)
+    new routes.Survey(this.app, this.connect)
+    new routes.Ticketing(this.app, this.connect)
+    new routes.ShoppingList(this.app, this.connect)
 
     this.app.use((req, res) => {
       res.status(404).json({
