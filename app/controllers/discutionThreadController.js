@@ -1,7 +1,3 @@
-// - Un fil de discussion peut être lié à 1 discutionthreade ou 1 événement mais pas les deux.
-// - Un fil de discussion contient 0 ou plusieurs messages créés par un membre ou un administrateurs/organisateurs.
-// - Chaque membre/participant peut commenter un message.
-
 const DiscutionThreadModel = require('../models/discutionthreadModel.js')
 
 /**

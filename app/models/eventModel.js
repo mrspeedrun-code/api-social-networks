@@ -29,7 +29,7 @@ const EventSchema = new Schema({
   list_of_organizers: [{
     type: mongoose.Schema.Types.ObjectId,
     ref: 'User',
-    required: [true, 'Event must have an organizers']
+    required: [true, 'Event must have one organizers at least']
   }],
   list_of_members: [{
     type: mongoose.Schema.Types.ObjectId,

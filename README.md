@@ -2,6 +2,10 @@
 
 This is a school project to make a social network API.
 
+API Blueprint documentation:
+https://mysocialnetworkapi.docs.apiary.io/
+
+
 ## Install
 ```
 npm install
@@ -20,6 +24,3 @@ npm run start
 npm run test
 
 ```
-
-API Blueprint documentation:
-https://mysocialnetworkapi.docs.apiary.io/

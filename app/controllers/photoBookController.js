@@ -1,11 +1,5 @@
 const PhotoBookControllerModel = require('../models/photobookModel.js')
 
-// - Un album photo est associé à 1 événement.
-// - Chaque album photo contient 0 ou plusieurs photos postées par 1 participant
-// de l’événement.
-// - Ces photos peuvent être commentées par 0 ou plusieurs particpant de
-// l’événement.
-
 /**
  * PhotoBookController
  * @class
