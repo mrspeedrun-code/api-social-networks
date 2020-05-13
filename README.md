@@ -21,5 +21,5 @@ npm run test
 
 ```
 
-API Documentation :
+API Blueprint documentation:
 https://mysocialnetworkapi.docs.apiary.io/
