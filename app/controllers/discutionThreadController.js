@@ -43,7 +43,7 @@ class DiscutionThread {
   show () {
     this.app.get('/discutionthread/show', (req, res) => {
       try {
-        this.DiscutionThreadModel.find({}).then(discutionthread => {
+        this.DiscutionThreadModel.find({}).populate('toChoice').then(discutionthread => {
           res.status(200).json(discutionthread || {})
         }).catch(err => {
           res.status(404).json({

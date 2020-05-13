@@ -8,19 +8,21 @@ const DiscutionThreadSchema = new Schema({
     required: true
   },
   sent: {
-    type: Date
+    type: Date,
+    default: Date.now
   },
   fromUserId: {
     type: mongoose.Schema.Types.ObjectId,
     ref: 'User'
   },
-  toGroupId: {
+  toChoice: {
     type: mongoose.Schema.Types.ObjectId,
-    ref: 'Group'
+    refPath: 'choice'
   },
-  toEventId: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: 'Event'
+  choice: {
+    type: String,
+    required: true,
+    enum: ['Group', 'Event']
   }
 })
 

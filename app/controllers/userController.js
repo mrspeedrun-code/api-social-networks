@@ -12,7 +12,6 @@ class User {
 
     this.create()
     this.show()
-    this.showById()
     this.update()
     this.delete()
     this.search()
@@ -57,8 +56,9 @@ class User {
       }
     })
   }
+
   /**
-   * Show All User
+   * Show User by id
    */
   show () {
     this.app.get('/user/show', (req, res) => {
@@ -78,12 +78,7 @@ class User {
         })
       }
     })
-  }
 
-  /**
-   * Show User by id
-   */
-  showById () {
     this.app.get('/user/show/:id', (req, res) => {
       try {
         this.UserModel.findById(req.params.id).then(user => {

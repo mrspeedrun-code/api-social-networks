@@ -42,7 +42,7 @@ class Group {
   show () {
     this.app.get('/group/show', (req, res) => {
       try {
-        this.GroupModel.find({}).then(group => {
+        this.GroupModel.find({}).populate('admins members').then(group => {
           res.status(200).json(group || {})
         }).catch(err => {
           res.status(404).json({
