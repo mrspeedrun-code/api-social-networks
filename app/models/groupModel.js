@@ -3,7 +3,7 @@ const mongoose = require('mongoose')
 const Schema = mongoose.Schema
 
 const GroupSchema = new Schema({
-  nom: {
+  name: {
     type: String
   },
   description: {
@@ -24,12 +24,22 @@ const GroupSchema = new Schema({
   },
   publication_authorization: {
     type: Boolean,
-    default: false
+    default: true
   },
   create_event_authorization: {
     type: Boolean,
     default: false
-  }
+  },
+  admins: [{
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'User',
+    required: [true, 'Group must have at least one admin']
+  }],
+  members: [{
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'User',
+    required: [true, 'Event must have few or many members']
+  }]
 })
 
 module.exports = GroupSchema

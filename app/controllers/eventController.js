@@ -52,7 +52,7 @@ class Event {
   show () {
     this.app.get('/event/show', (req, res) => {
       try {
-        this.EventModel.find({}).populate('list_of_organizers').then(event => {
+        this.EventModel.find({}).populate('list_of_organizers list_of_members').then(event => {
           res.status(200).json(event || {})
         }).catch(err => {
           res.status(404).json({
