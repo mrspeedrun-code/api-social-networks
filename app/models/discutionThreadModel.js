@@ -3,17 +3,34 @@ const mongoose = require('mongoose')
 const Schema = mongoose.Schema
 
 const DiscutionThreadSchema = new Schema({
-  message: {
-    type: String,
-    required: true
-  },
-  sent: {
+  message: [{
+    content: {
+      text: {
+        type: String,
+        require: true
+      },
+      comment: [{
+        text: {
+          type: String
+        },
+        userId: {
+          type: mongoose.Schema.Types.ObjectId,
+          ref: 'User'
+        }
+      }]
+    },
+    time: {
+      type: Date,
+      default: Date.now
+    },
+    userId: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: 'User'
+    }
+  }],
+  time: {
     type: Date,
     default: Date.now
-  },
-  fromUserId: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: 'User'
   },
   toChoice: {
     type: mongoose.Schema.Types.ObjectId,
