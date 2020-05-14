@@ -12,8 +12,17 @@ const ShoppingListSchema = new Schema({
   arrival_time: {
     type: String
   },
-  special_event_product: {
-    type: String
+  special_event_product: [{
+    type: String,
+    unique: true
+  }],
+  event: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'Event'
+  },
+  active: {
+    type: Boolean,
+    default: true
   }
 })
 

@@ -1,8 +1,5 @@
 const GroupModel = require('../models/groupModel.js')
 
-// - Un groupe possède 1 ou plusieurs membres.
-// - Un groupe est géré par 1 ou plusieurs administrateurs.
-
 /**
  * Group
  * @class
@@ -65,7 +62,7 @@ class Group {
   showById () {
     this.app.get('/group/show/:id', (req, res) => {
       try {
-        this.GroupModel.findById(req.params.id).then(group => {
+        this.GroupModel.findById(req.params.id).populate('admins members').then(group => {
           res.status(200).json(group || {})
         }).catch(err => {
           res.status(404).json({

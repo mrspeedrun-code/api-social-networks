@@ -1,8 +1,5 @@
 const EventModel = require('../models/eventModel.js')
 
-// - Un événement peut avoir une multitude de participants. ok
-// - Un événement est géré par 1 ou plusieurs organisateurs.
-
 /**
  * Event
  * @class
