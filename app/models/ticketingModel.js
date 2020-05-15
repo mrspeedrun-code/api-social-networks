@@ -24,6 +24,9 @@ const TicketingSchema = new Schema({
       },
       date_of_purchase: {
         type: Date
+      },
+      qte: {
+        type: Number
       }
     }
   ]

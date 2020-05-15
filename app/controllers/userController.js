@@ -39,7 +39,7 @@ class User {
             // pasword encrypt
             req.body.password = bcrypt.hashSync(req.body.password, 10)
             this.UserModel(req.body).save().then(user => {
-              res.status(200).json(user || {})
+              res.status(201).json(user || {})
             }).catch(err => {
               res.status(500).json({
                 code: 500,
@@ -128,7 +128,7 @@ class User {
     this.app.delete('/user/destroy/:id', (req, res) => {
       try {
         this.UserModel.findByIdAndRemove(req.params.id).exec().then(user => {
-          res.status(200).json(user || {})
+          res.status(204).json(user || {})
         }).catch(err => {
           res.status(404).json({
             code: 404,

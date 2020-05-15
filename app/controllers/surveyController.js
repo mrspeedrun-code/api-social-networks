@@ -107,6 +107,25 @@ class Survey {
         })
       }
     })
+
+    // update answer choice
+    this.app.put('/survey/update/answer/:id', (req, res) => {
+      try {
+        this.SurveyModel.findByIdAndUpdate(req.params.id, req.body.answerChoice).then(survey => {
+          res.status(200).json(survey || {})
+        }).catch(err => {
+          res.status(404).json({
+            code: 404,
+            message: err + ` Cannot update Survey Answer with id=${req.params.id}. Survey was not found!`
+          })
+        })
+      } catch (err) {
+        res.status(500).json({
+          code: 500,
+          message: err + ` Error updating Survey with id=${req.params.id}.`
+        })
+      }
+    })
   }
 
   /**

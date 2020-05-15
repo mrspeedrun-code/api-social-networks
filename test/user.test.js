@@ -8,7 +8,7 @@ const { expect } = chai
 const id = ''
 
 chai.use(chaiHttp)
-
+setTimeout(() => console.log('test'), 3000)
 /**
 * GET /user
 */

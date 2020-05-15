@@ -22,7 +22,7 @@ class Event {
   create () {
     this.app.post('/event/admin/create', (req, res) => {
       this.EventModel(req.body).save().then(event => {
-        res.status(200).json(event || {})
+        res.status(201).json(event || {})
       }).catch(err => {
         res.status(500).json({
           code: 500,
