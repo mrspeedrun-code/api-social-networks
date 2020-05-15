@@ -80,6 +80,7 @@ It's CRUDS api for managed user, event, group, thread, photo cover, survey and t
 * HTTP request : POST → survey/create
 * HTTP request : GET → survey/show
 * HTTP request : PUT → survey/update/:id
+* HTTP request : PUT → survey/update/answer/:id
 * HTTP request : DELETE → survey/destroy
 * HTTP request : GET → survey/search
 
