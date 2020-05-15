@@ -1,4 +1,5 @@
 const EventModel = require('../models/eventModel.js')
+const JWT = require('../../app/jwt')
 
 /**
  * Event
@@ -8,6 +9,7 @@ class Event {
   constructor (app, connect) {
     this.app = app
     this.EventModel = connect.model('Event', EventModel)
+    this.jwt = new JWT()
 
     this.create()
     this.show()
@@ -20,18 +22,7 @@ class Event {
    * Create event
    */
   create () {
-    this.app.post('/event/admin/create', (req, res) => {
-      this.EventModel(req.body).save().then(event => {
-        res.status(201).json(event || {})
-      }).catch(err => {
-        res.status(500).json({
-          code: 500,
-          message: err
-        })
-      })
-    })
-
-    this.app.post('/event/create', (req, res) => {
+    this.app.post('/event/create', this.jwt.verifyOrganizerToken(), (req, res) => {
       this.EventModel(req.body).save().then(event => {
         res.status(200).json(event || {})
       }).catch(err => {
@@ -47,7 +38,7 @@ class Event {
    * Show All Event
    */
   show () {
-    this.app.get('/event/show', (req, res) => {
+    this.app.get('/event/show', this.jwt.verifyOrganizerToken(), (req, res) => {
       try {
         this.EventModel.find({}).populate('list_of_organizers list_of_members').then(event => {
           res.status(200).json(event || {})
@@ -65,7 +56,7 @@ class Event {
       }
     })
 
-    this.app.get('/event/show/:id', (req, res) => {
+    this.app.get('/event/show/:id', this.jwt.verifyOrganizerToken(), (req, res) => {
       try {
         this.EventModel.findById(req.params.id).populate('list_of_organizers').then(event => {
           res.status(200).json(event || {})
@@ -88,7 +79,7 @@ class Event {
    * Update by id
    */
   update () {
-    this.app.put('/event/update/:id', (req, res) => {
+    this.app.put('/event/update/:id', this.jwt.verifyOrganizerToken(), (req, res) => {
       try {
         this.EventModel.findByIdAndUpdate(req.params.id, req.body).then(event => {
           res.status(200).json(event || {})
@@ -111,7 +102,7 @@ class Event {
    * Delete Event by Id
    */
   delete () {
-    this.app.delete('/event/destroy/:id', (req, res) => {
+    this.app.delete('/event/destroy/:id', this.jwt.verifyOrganizerToken(), (req, res) => {
       try {
         this.EventModel.findByIdAndRemove(req.params.id).exec().then(event => {
           res.status(200).json(event || {})
@@ -134,7 +125,7 @@ class Event {
    * List
    */
   search () {
-    this.app.post('/event/search', (req, res) => {
+    this.app.post('/event/search', this.jwt.verifyOrganizerToken(), (req, res) => {
       try {
         const pipe = [{ $limit: req.body.limit || 10 }]
 
