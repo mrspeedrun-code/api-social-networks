@@ -113,6 +113,20 @@ It's CRUDS api for managed user, event, group, thread, photo cover, survey and t
 * HTTP request : DELETE → shoppingList/destroy
 * HTTP request : GET → shoppingList/search
 
+### Carpooling (CRUDS)
+
+|                            |                  |
+|----------------------------|------------------|
+| Requires authentication ?  | Yes               |
+| Who can use it ?           | Members
+| Response formats           | application/json |
+
+* HTTP request : POST → carpooling/create
+* HTTP request : GET → carpoolinkg/show
+* HTTP request : PUT → carpooling/update/:id
+* HTTP request : DELETE → carpooling/destroy
+* HTTP request : GET → carpooling/search
+
 
 ## Install
 ```

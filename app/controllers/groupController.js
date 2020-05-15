@@ -1,5 +1,5 @@
 const GroupModel = require('../models/groupModel.js')
-const JWT = require('../../app/jwt')
+const AdminJWT = require('../../token/adminToken')
 
 /**
  * Group
@@ -9,7 +9,7 @@ class Group {
   constructor (app, connect) {
     this.app = app
     this.GroupModel = connect.model('Group', GroupModel)
-    this.jwt = new JWT()
+    this.jwt = new AdminJWT()
 
     this.create()
     this.show()

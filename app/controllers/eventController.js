@@ -1,5 +1,5 @@
 const EventModel = require('../models/eventModel.js')
-const JWT = require('../../app/jwt')
+const OrganizerJWT = require('../../token/organizerToken')
 
 /**
  * Event
@@ -9,7 +9,7 @@ class Event {
   constructor (app, connect) {
     this.app = app
     this.EventModel = connect.model('Event', EventModel)
-    this.jwt = new JWT()
+    this.jwt = new OrganizerJWT()
 
     this.create()
     this.show()

@@ -1,4 +1,5 @@
 const ShoppingListModel = require('../models/shoppinglistModel.js')
+const MemberJWT = require('../../token/memberToken')
 
 /**
  * ShoppingList
@@ -8,6 +9,7 @@ class ShoppingList {
   constructor (app, connect) {
     this.app = app
     this.ShoppingListModel = connect.model('ShoppingList', ShoppingListModel)
+    this.jwt = new MemberJWT()
 
     this.create()
     this.show()
@@ -21,7 +23,7 @@ class ShoppingList {
    * Create ShoppingList
    */
   create () {
-    this.app.post('/shoppinglist/create', (req, res) => {
+    this.app.post('/shoppinglist/create', this.jwt.verifyMemberToken(), (req, res) => {
       this.ShoppingListModel(req.body).save().then(shoppinglist => {
         res.status(200).json(shoppinglist || {})
       }).catch(err => {
@@ -37,7 +39,7 @@ class ShoppingList {
    * Show All ShoppingList
    */
   show () {
-    this.app.get('/shoppinglist/show', (req, res) => {
+    this.app.get('/shoppinglist/show', this.jwt.verifyMemberToken(), (req, res) => {
       try {
         this.ShoppingListModel.find({}).then(shoppinglist => {
           res.status(200).json(shoppinglist || {})
@@ -60,7 +62,7 @@ class ShoppingList {
    * Show ShoppingList by id
    */
   showById () {
-    this.app.get('/shoppinglist/show/:id', (req, res) => {
+    this.app.get('/shoppinglist/show/:id', this.jwt.verifyMemberToken(), (req, res) => {
       try {
         this.ShoppingListModel.findById(req.params.id).then(shoppinglist => {
           res.status(200).json(shoppinglist || {})
@@ -83,7 +85,7 @@ class ShoppingList {
    * Update by id
    */
   update () {
-    this.app.put('/shoppinglist/update/:id', (req, res) => {
+    this.app.put('/shoppinglist/update/:id', this.jwt.verifyMemberToken(), (req, res) => {
       try {
         this.ShoppingListModel.findByIdAndUpdate(req.params.id, req.body).then(shoppinglist => {
           res.status(200).json(shoppinglist || {})
@@ -106,7 +108,7 @@ class ShoppingList {
    * Delete ShoppingList by Id
    */
   delete () {
-    this.app.delete('/shoppinglist/destroy/:id', (req, res) => {
+    this.app.delete('/shoppinglist/destroy/:id', this.jwt.verifyMemberToken(), (req, res) => {
       try {
         this.ShoppingListModel.findByIdAndRemove(req.params.id).exec().then(shoppinglist => {
           res.status(200).json(shoppinglist || {})
@@ -129,7 +131,7 @@ class ShoppingList {
    * List
    */
   search () {
-    this.app.post('/shoppinglist/search', (req, res) => {
+    this.app.post('/shoppinglist/search', this.jwt.verifyMemberToken(), (req, res) => {
       try {
         const pipe = [{ $limit: req.body.limit || 10 }]
 

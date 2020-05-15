@@ -1,4 +1,6 @@
 const SurveyModel = require('../models/surveyModel.js')
+const OrganizerJWT = require('../../token/organizerToken')
+const MemberJWT = require('../../token/memberToken')
 
 /**
  * Survey
@@ -8,6 +10,8 @@ class Survey {
   constructor (app, connect) {
     this.app = app
     this.SurveyModel = connect.model('Survey', SurveyModel)
+    this.jwt = new OrganizerJWT()
+    this.memberjwt = new MemberJWT()
 
     this.create()
     this.show()
@@ -21,7 +25,7 @@ class Survey {
    * Create Survey
    */
   create () {
-    this.app.post('/survey/create', (req, res) => {
+    this.app.post('/survey/create', this.jwt.verifyOrganizerToken(), (req, res) => {
       this.SurveyModel(req.body).save().then(survey => {
         res.status(200).json(survey || {})
       }).catch(err => {
@@ -83,7 +87,7 @@ class Survey {
    * Update by id
    */
   update () {
-    this.app.put('/survey/update/:id', (req, res) => {
+    this.app.put('/survey/update/:id', this.jwt.verifyOrganizerToken(), (req, res) => {
       try {
         this.SurveyModel.findByIdAndUpdate(req.params.id, req.body).then(survey => {
           res.status(200).json(survey || {})
@@ -102,7 +106,7 @@ class Survey {
     })
 
     // update answer choice
-    this.app.put('/survey/update/answer/:id', (req, res) => {
+    this.app.put('/survey/update/answer/:id', this.memberjwt.verifyMemberToken(), (req, res) => {
       try {
         this.SurveyModel.findByIdAndUpdate(req.params.id, req.body.answerChoice).then(survey => {
           res.status(200).json(survey || {})
@@ -125,7 +129,7 @@ class Survey {
    * Delete Survey by Id
    */
   delete () {
-    this.app.delete('/survey/destroy/:id', (req, res) => {
+    this.app.delete('/survey/destroy/:id', this.jwt.verifyOrganizerToken(), (req, res) => {
       try {
         this.SurveyModel.findByIdAndRemove(req.params.id).exec().then(survey => {
           res.status(200).json(survey || {})

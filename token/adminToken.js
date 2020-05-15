@@ -63,25 +63,25 @@ class JWT {
    * @param {string} token
    */
   saveToken (token) {
-    if (process.env.TOKENS) {
-      const tokens = process.env.TOKENS.split(',')
+    if (process.env.TOKENS_ADMIN) {
+      const tokens = process.env.TOKENS_ADMIN.split(',')
 
       tokens.push(token)
 
-      process.env.TOKENS = tokens.join(',')
+      process.env.TOKENS_ADMIN = tokens.join(',')
 
       return
     }
 
-    process.env.TOKENS = token
+    process.env.TOKENS_ADMIN = token
   }
 
   /**
    * Get tokens
-   * @return {Array} TOKENS
+   * @return {Array} TOKENS_ADMIN
    */
   getTokens () {
-    return process.env.TOKENS.split(',')
+    return process.env.TOKENS_ADMIN.split(',')
   }
 
   getToken (tokenSource) {
@@ -94,40 +94,12 @@ class JWT {
     return this.getToken(tokenSource)
   }
 
-  verifyOrganizerToken () {
-    process.env.TOKENS = 'organizertoken1234'
-
-    return (req, res, next) => {
-      if (req.headers['access-token'] || req.headers['token']) {
-        const token = req.headers['access-token'] || req.headers['token']
-
-        if (this.verify(token)) {
-          next()
-
-          return
-        }
-
-        res.status(401).json({
-          code: 401,
-          message: 'unauthorized'
-        })
-
-        return
-      }
-
-      res.status(403).json({
-        code: 403,
-        message: 'Invalid parameters in header please set token or access-token'
-      })
-    }
-  }
-
   verifyAdminToken () {
-    process.env.TOKENS = 'admintoken1234'
+    process.env.TOKENS_ADMIN = 'admintoken1234'
 
     return (req, res, next) => {
-      if (req.headers['access-token'] || req.headers['token']) {
-        const token = req.headers['access-token'] || req.headers['token']
+      if (req.headers['access-token-admin'] || req.headers['token']) {
+        const token = req.headers['access-token-admin'] || req.headers['token']
 
         if (this.verify(token)) {
           next()

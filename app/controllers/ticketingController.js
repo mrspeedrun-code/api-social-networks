@@ -1,4 +1,5 @@
 const TicketingModel = require('../models/ticketingModel.js')
+const OrganizerJWT = require('../../token/organizerToken')
 
 /**
  * Ticketing
@@ -8,6 +9,7 @@ class Ticketing {
   constructor (app, connect) {
     this.app = app
     this.TicketingModel = connect.model('Ticketing', TicketingModel)
+    this.jwt = new OrganizerJWT()
 
     this.create()
     this.show()
@@ -21,7 +23,7 @@ class Ticketing {
    * Create Ticketing
    */
   create () {
-    this.app.post('/ticketing/create', (req, res) => {
+    this.app.post('/ticketing/create', this.jwt.verifyOrganizerToken(), (req, res) => {
       this.TicketingModel(req.body).save().then(ticketing => {
         res.status(200).json(ticketing || {})
       }).catch(err => {
@@ -37,7 +39,7 @@ class Ticketing {
    * Show All Ticketing
    */
   show () {
-    this.app.get('/ticketing/show', (req, res) => {
+    this.app.get('/ticketing/show', this.jwt.verifyOrganizerToken(), (req, res) => {
       try {
         this.TicketingModel.find({}).then(ticketing => {
           res.status(200).json(ticketing || {})
@@ -60,7 +62,7 @@ class Ticketing {
    * Show Ticketing by id
    */
   showById () {
-    this.app.get('/ticketing/show/:id', (req, res) => {
+    this.app.get('/ticketing/show/:id', this.jwt.verifyOrganizerToken(), (req, res) => {
       try {
         this.TicketingModel.findById(req.params.id).then(ticketing => {
           res.status(200).json(ticketing || {})
@@ -83,7 +85,7 @@ class Ticketing {
    * Update by id
    */
   update () {
-    this.app.put('/ticketing/update/:id', (req, res) => {
+    this.app.put('/ticketing/update/:id', this.jwt.verifyOrganizerToken(), (req, res) => {
       try {
         this.TicketingModel.findByIdAndUpdate(req.params.id, req.body).then(ticketing => {
           res.status(200).json(ticketing || {})
@@ -106,7 +108,7 @@ class Ticketing {
    * Delete Ticketing by Id
    */
   delete () {
-    this.app.delete('/ticketing/destroy/:id', (req, res) => {
+    this.app.delete('/ticketing/destroy/:id', this.jwt.verifyOrganizerToken(), (req, res) => {
       try {
         this.TicketingModel.findByIdAndRemove(req.params.id).exec().then(ticketing => {
           res.status(200).json(ticketing || {})
@@ -129,7 +131,7 @@ class Ticketing {
    * List
    */
   search () {
-    this.app.post('/ticketing/search', (req, res) => {
+    this.app.post('/ticketing/search', this.jwt.verifyOrganizerToken(), (req, res) => {
       try {
         const pipe = [{ $limit: req.body.limit || 10 }]
 
