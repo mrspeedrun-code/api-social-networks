@@ -6,6 +6,7 @@ const PhotoBook = require('./controllers/photoBookController')
 const Survey = require('./controllers/surveyController')
 const Ticketing = require('./controllers/ticketingController')
 const ShoppingList = require('./controllers/shoppingListController')
+const Carpooling = require('./controllers/carpoolingController')
 
 module.exports = {
   User,
@@ -15,5 +16,6 @@ module.exports = {
   PhotoBook,
   Survey,
   Ticketing,
-  ShoppingList
+  ShoppingList,
+  Carpooling
 }

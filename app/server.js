@@ -67,6 +67,7 @@ class Server {
     new routes.Survey(this.app, this.connect)
     new routes.Ticketing(this.app, this.connect)
     new routes.ShoppingList(this.app, this.connect)
+    new routes.Carpooling(this.app, this.connect)
 
     this.app.use((req, res) => {
       res.status(404).json({
