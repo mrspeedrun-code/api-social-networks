@@ -9,8 +9,7 @@ https://mysocialnetworkapi.docs.apiary.io/
 It's CRUDS api for managed user, event, group, thread, photo cover, survey and ticketing.
 
 
-### [POST] Create user
-Allows the creation of a single user.
+### User (CRUDS)
 
 |                            |                  |
 |----------------------------|------------------|
@@ -19,10 +18,13 @@ Allows the creation of a single user.
 | Response formats           | application/json |
 
 * HTTP request : POST → user/create
+* HTTP request : GET → user/show
+* HTTP request : PUT → user/update/:id
+* HTTP request : DELETE → user/destroy
+* HTTP request : GET → user/search
 
 
-### [POST] Create Event
-Allows the creation of a single event.
+### Event (CRUDS)
 
 |                            |                  |
 |----------------------------|------------------|
@@ -31,11 +33,13 @@ Allows the creation of a single event.
 | Response formats           | application/json |
 
 * HTTP request : POST → event/create
+* HTTP request : GET → event/show
+* HTTP request : PUT → event/update/:id
+* HTTP request : DELETE → event/destroy
+* HTTP request : GET → event/search
 
 
-
-### [POST] Create Group
-Allows the creation of a single group.
+### Group (CRUDS)
 
 |                            |                  |
 |----------------------------|------------------|
@@ -43,12 +47,14 @@ Allows the creation of a single group.
 | Who can use it ?           | Admin
 | Response formats           | application/json |
 
-* HTTP request : POST → Group/create
+* HTTP request : POST → group/create
+* HTTP request : GET → group/show
+* HTTP request : PUT → group/update/:id
+* HTTP request : DELETE → group/destroy
+* HTTP request : GET → group/search
 
 
-
-### [POST] Create Photo Book
-Allows the creation of a single photo book.
+### Photo Book (CRUDS)
 
 |                            |                  |
 |----------------------------|------------------|
@@ -57,11 +63,13 @@ Allows the creation of a single photo book.
 | Response formats           | application/json |
 
 * HTTP request : POST → photoBook/create
+* HTTP request : GET → photoBook/show
+* HTTP request : PUT → photoBook/update/:id
+* HTTP request : DELETE → photoBook/destroy
+* HTTP request : GET → photoBook/search
 
 
-
-### [POST] Create Survey
-Allows the creation of a single survey.
+### Survey (CRUDS)
 
 |                            |                  |
 |----------------------------|------------------|
@@ -70,10 +78,13 @@ Allows the creation of a single survey.
 | Response formats           | application/json |
 
 * HTTP request : POST → survey/create
+* HTTP request : GET → survey/show
+* HTTP request : PUT → survey/update/:id
+* HTTP request : DELETE → survey/destroy
+* HTTP request : GET → survey/search
 
 
-### [POST] Create Ticketing
-Allows the creation of a ticketing.
+### Ticketing (CRUDS)
 
 |                            |                  |
 |----------------------------|------------------|
@@ -82,10 +93,13 @@ Allows the creation of a ticketing.
 | Response formats           | application/json |
 
 * HTTP request : POST → ticketing/create
+* HTTP request : GET → ticketing/show
+* HTTP request : PUT → ticketing/update/:id
+* HTTP request : DELETE → ticketing/destroy
+* HTTP request : GET → ticketing/search
 
 
-### [POST] Create ShoppingList
-Allows the creation of a single event.
+### ShoppingList (CRUDS)
 
 |                            |                  |
 |----------------------------|------------------|
@@ -94,7 +108,10 @@ Allows the creation of a single event.
 | Response formats           | application/json |
 
 * HTTP request : POST → shoppingList/create
-
+* HTTP request : GET → shoppingList/show
+* HTTP request : PUT → shoppingList/update/:id
+* HTTP request : DELETE → shoppingList/destroy
+* HTTP request : GET → shoppingList/search
 
 
 ## Install
