@@ -1,11 +1,5 @@
 const ShoppingListModel = require('../models/shoppinglistModel.js')
 
-// Lors d’un événement si la shopping list est activée, un utilisateur peut indiquer ce qu’il va apporter à l’événement. Pour cela il indique:
-// - Un nom
-// - Une quantité
-// - Une heure d’arrivée à l’événement
-// - Chaque chose apporté doit être unique par événement
-
 /**
  * ShoppingList
  * @class

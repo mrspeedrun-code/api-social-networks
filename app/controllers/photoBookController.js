@@ -1,4 +1,4 @@
-const PhotoBookControllerModel = require('../models/photobookModel.js')
+const PhotoBookModel = require('../models/photobookModel.js')
 
 /**
  * PhotoBookController
@@ -7,7 +7,7 @@ const PhotoBookControllerModel = require('../models/photobookModel.js')
 class PhotoBookController {
   constructor (app, connect) {
     this.app = app
-    this.PhotoBookControllerModel = connect.model('PhotoBookController', PhotoBookControllerModel)
+    this.PhotoBookControllerModel = connect.model('PhotoBook', PhotoBookModel)
 
     this.create()
     this.show()

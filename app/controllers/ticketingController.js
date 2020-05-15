@@ -1,12 +1,5 @@
 const TicketingModel = require('../models/ticketingModel.js')
 
-// - Certain événement publique possède une billetterie.
-// - Un organisateur peut décider de créer 1 ou plusieurs types de billets à sa
-// convenance. Un type de billet contient : - Un nom
-// - Un montant
-// - Une quantité limité de billet
-// - Une personne extérieure peut obtenir 1 seul billet.
-
 /**
  * Ticketing
  * @class
