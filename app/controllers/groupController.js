@@ -1,4 +1,5 @@
 const GroupModel = require('../models/groupModel.js')
+const JWT = require('../../app/jwt')
 
 /**
  * Group
@@ -8,6 +9,7 @@ class Group {
   constructor (app, connect) {
     this.app = app
     this.GroupModel = connect.model('Group', GroupModel)
+    this.jwt = new JWT()
 
     this.create()
     this.show()
@@ -21,7 +23,7 @@ class Group {
    * Create Group
    */
   create () {
-    this.app.post('/group/create', (req, res) => {
+    this.app.post('/group/create', this.jwt.verifyAdminToken(), (req, res) => {
       this.GroupModel(req.body).save().then(group => {
         res.status(200).json(group || {})
       }).catch(err => {
@@ -37,7 +39,7 @@ class Group {
    * Show All Group
    */
   show () {
-    this.app.get('/group/show', (req, res) => {
+    this.app.get('/group/show', this.jwt.verifyAdminToken(), (req, res) => {
       try {
         this.GroupModel.find({}).populate('admins members').then(group => {
           res.status(200).json(group || {})
@@ -60,7 +62,7 @@ class Group {
    * Show Group by id
    */
   showById () {
-    this.app.get('/group/show/:id', (req, res) => {
+    this.app.get('/group/show/:id', this.jwt.verifyAdminToken(), (req, res) => {
       try {
         this.GroupModel.findById(req.params.id).populate('admins members').then(group => {
           res.status(200).json(group || {})
@@ -83,7 +85,7 @@ class Group {
    * Update by id
    */
   update () {
-    this.app.put('/group/update/:id', (req, res) => {
+    this.app.put('/group/update/:id', this.jwt.verifyAdminToken(), (req, res) => {
       try {
         this.GroupModel.findByIdAndUpdate(req.params.id, req.body).then(group => {
           res.status(200).json(group || {})
@@ -106,7 +108,7 @@ class Group {
    * Delete Group by Id
    */
   delete () {
-    this.app.delete('/group/destroy/:id', (req, res) => {
+    this.app.delete('/group/destroy/:id', this.jwt.verifyAdminToken(), (req, res) => {
       try {
         this.GroupModel.findByIdAndRemove(req.params.id).exec().then(group => {
           res.status(200).json(group || {})
@@ -129,7 +131,7 @@ class Group {
    * List
    */
   search () {
-    this.app.post('/group/search', (req, res) => {
+    this.app.post('/group/search', this.jwt.verifyAdminToken(), (req, res) => {
       try {
         const pipe = [{ $limit: req.body.limit || 10 }]
 
